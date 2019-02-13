@@ -160,7 +160,9 @@ namespace ImageProcessing4
                 Cv2.PutText(labelView2, text, new OpenCvSharp.Point(centroid_x_int, centroid_y_int), HersheyFonts.HersheyComplexSmall, 1, new Scalar(0, 0, 255), 1, LineTypes.AntiAlias);
 
             }
-
+            ////////////////////////////////////////////////////////////////
+            //検討中
+            ///////////////////////////////////////////////////////////////
             //Contour処理・・・なかなかうまくいかない
             //https://searchcode.com/codesearch/view/88850698/
             /*
