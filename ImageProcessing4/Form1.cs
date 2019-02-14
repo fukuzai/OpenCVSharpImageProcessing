@@ -58,7 +58,7 @@ namespace ImageProcessing4
             //入力チェック
             if (string.IsNullOrWhiteSpace(textBox4.Text))
             {
-                MessageBox.Show("出力先を指定してや！");
+                MessageBox.Show("出力先を指定してください！");
                 return;
             }
             //テキストボックスからパスを取得
