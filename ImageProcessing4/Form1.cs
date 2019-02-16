@@ -64,6 +64,14 @@ namespace ImageProcessing4
             //テキストボックスからパスを取得
             string FolderPath = textBox4.Text;
 
+            //csv出力
+            // true:既存のファイルに追記
+            // false:ファイルを新規作成する
+            var sw = new System.IO.StreamWriter(FolderPath + "/Result.csv", false, System.Text.Encoding.GetEncoding("Shift_JIS"));
+            //ヘッダー書き込み
+            sw.WriteLine("ファイル名,{0}", FileName);
+            sw.WriteLine("No., 面積[pix], 高さ[pix], 幅[pix], 重心X座標[pix], 重心Y座標[pix]");
+
 
             //DataGridView初期化（データクリア）
             //dataGridView1.Columns.Clear();
@@ -83,13 +91,15 @@ namespace ImageProcessing4
             bool result = int.TryParse(binTH_check, out i);
             if(result == true)
             {
+                //入力された二値化閾値を取得
                 int binTH = Int32.Parse(textBox2.Text);
+                //二値化処理の実行
                 Cv2.Threshold(src, bin, binTH, 255, ThresholdTypes.Binary);
 
             }
             else
             {
-                MessageBox.Show("適切な二値化閾値を入力してや！", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("適切な二値化閾値を入力して下さい。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -101,10 +111,11 @@ namespace ImageProcessing4
             Mat rectView = bin.CvtColor(ColorConversionCodes.GRAY2BGR);　//外接矩形用Matを用意
 
             ConnectedComponents cc = Cv2.ConnectedComponentsEx(bin);
-            if(cc.LabelCount <= 1)
+            if(cc.LabelCount <= 1) {
+                MessageBox.Show("ブロブが存在しません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                sw.Close();
                 return;
-
-
+            }
 
 
             //ラベリング後のブロブ個数を出力する
@@ -158,6 +169,10 @@ namespace ImageProcessing4
                 //blobnumberを描画する
                 string text = blobnumber.ToString(); //描画する文字列を指定
                 Cv2.PutText(labelView2, text, new OpenCvSharp.Point(centroid_x_int, centroid_y_int), HersheyFonts.HersheyComplexSmall, 1, new Scalar(0, 0, 255), 1, LineTypes.AntiAlias);
+
+                //csv出力
+                string data = blobnumber.ToString() + "," + blobarea.ToString() + "," + blobheight.ToString() + "," + blobwidth.ToString() + "," + centroid_x_int.ToString() + "," + centroid_y_int.ToString();
+                sw.WriteLine(data);
 
             }
             ////////////////////////////////////////////////////////////////
@@ -244,6 +259,9 @@ namespace ImageProcessing4
 
             //処理が終わったら、メッセージを表示する
             MessageBox.Show("終わりましたよ～。", "", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+
+            //scvをクローズ
+            sw.Close();
         }
 
         //参照ボタン

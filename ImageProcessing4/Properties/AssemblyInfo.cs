@@ -32,10 +32,11 @@ using System.Runtime.InteropServices;
 // すべての値を指定するか、次を使用してビルド番号とリビジョン番号を既定に設定できます
 // 既定値にすることができます:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.1.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
 
 //リリース履歴
 /*
- 1.0.0.0    初版  2018-07-    
+ 1.0.0.0    初版  2018-07-
+ 1.1.0.0    csv出力の実装 
  */
