@@ -119,9 +119,6 @@ namespace ImageProcessing4
                 return;
             }
 
-
-
-
             //ラベリング
             Mat labelView = bin.EmptyClone(); //ラベリング画像用Matを用意
             Mat rectView = bin.CvtColor(ColorConversionCodes.GRAY2BGR);　//外接矩形用Matを用意
@@ -130,8 +127,20 @@ namespace ImageProcessing4
 
             //ブロブ個数のチェック
             if(cc.LabelCount <= 1) {
-                MessageBox.Show("ブロブが存在しません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                
+                                //ラべリング結果をGUI上に描画
+                Bitmap canvas4 = new Bitmap(pictureBox3.Width, pictureBox3.Height);
+                Graphics g4 = Graphics.FromImage(canvas4);
+                g4.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+                Bitmap bitimg4 = MatToBitmap(labelView);
+                g4.DrawImage(bitimg4, 0, 0, 300, 300);
+                bitimg4.Dispose();
+                pictureBox3.Image = canvas4;
+
+                //csvをクローズ
                 sw.Close();
+
+                MessageBox.Show("ブロブが存在しません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 

@@ -67,7 +67,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(8, 10);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(210, 21);
+            this.label1.Size = new System.Drawing.Size(120, 12);
             this.label1.TabIndex = 0;
             this.label1.Text = "解析画像ファイルを指定";
             // 
@@ -75,12 +75,12 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(12, 34);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(515, 28);
+            this.textBox1.Size = new System.Drawing.Size(515, 19);
             this.textBox1.TabIndex = 1;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(537, 29);
+            this.button1.Location = new System.Drawing.Point(537, 25);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 36);
             this.button1.TabIndex = 2;
@@ -137,7 +137,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(6, 34);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(115, 21);
+            this.label2.Size = new System.Drawing.Size(65, 12);
             this.label2.TabIndex = 7;
             this.label2.Text = "二値化閾値";
             // 
@@ -156,7 +156,7 @@
             // 
             this.textBox2.Location = new System.Drawing.Point(127, 34);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(156, 28);
+            this.textBox2.Size = new System.Drawing.Size(156, 19);
             this.textBox2.TabIndex = 8;
             // 
             // label3
@@ -164,7 +164,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(124, 205);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(94, 21);
+            this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 9;
             this.label3.Text = "入力画像";
             // 
@@ -173,7 +173,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(424, 205);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(115, 21);
+            this.label4.Size = new System.Drawing.Size(65, 12);
             this.label4.TabIndex = 10;
             this.label4.Text = "二値化画像";
             // 
@@ -201,7 +201,7 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(715, 202);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(145, 21);
+            this.label5.Size = new System.Drawing.Size(82, 12);
             this.label5.TabIndex = 12;
             this.label5.Text = "ラベルリング画像";
             // 
@@ -256,7 +256,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(538, 91);
+            this.button4.Location = new System.Drawing.Point(538, 82);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 36);
             this.button4.TabIndex = 16;
@@ -268,7 +268,7 @@
             // 
             this.textBox4.Location = new System.Drawing.Point(12, 92);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(515, 28);
+            this.textBox4.Size = new System.Drawing.Size(515, 19);
             this.textBox4.TabIndex = 15;
             // 
             // label6
@@ -276,7 +276,7 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(8, 67);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(233, 21);
+            this.label6.Size = new System.Drawing.Size(133, 12);
             this.label6.TabIndex = 17;
             this.label6.Text = "結果出力先フォルダを指定";
             // 
