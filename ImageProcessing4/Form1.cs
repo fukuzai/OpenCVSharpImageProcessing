@@ -49,7 +49,7 @@ namespace ImageProcessing4
             //入力チェック
             if (string.IsNullOrWhiteSpace(textBox1.Text))
             {
-                MessageBox.Show("解析する画像ファイルを指定してや！");
+                MessageBox.Show("解析する画像ファイルを指定して下さい。");
                 return;
             }
             //テキストボックスからファイル名を取得
@@ -58,7 +58,7 @@ namespace ImageProcessing4
             //入力チェック
             if (string.IsNullOrWhiteSpace(textBox4.Text))
             {
-                MessageBox.Show("出力先を指定してください！");
+                MessageBox.Show("出力先を指定してください。");
                 return;
             }
             //テキストボックスからパスを取得
@@ -70,7 +70,7 @@ namespace ImageProcessing4
             var sw = new System.IO.StreamWriter(FolderPath + "/Result.csv", false, System.Text.Encoding.GetEncoding("Shift_JIS"));
             //ヘッダー書き込み
             sw.WriteLine("ファイル名,{0}", FileName);
-            sw.WriteLine("No., 面積[pix], 高さ[pix], 幅[pix], 重心X座標[pix], 重心Y座標[pix]");
+            //sw.WriteLine("No., 面積[pix], 高さ[pix], 幅[pix], 重心X座標[pix], 重心Y座標[pix]");
 
 
             //DataGridView初期化（データクリア）
@@ -96,6 +96,22 @@ namespace ImageProcessing4
                 //二値化処理の実行
                 Cv2.Threshold(src, bin, binTH, 255, ThresholdTypes.Binary);
 
+                //画像保存
+                Cv2.ImWrite(FolderPath + "/二値化処理画像.jpg", bin); //二値化画像
+
+                //二値化閾値をcsvに出力
+                sw.WriteLine("二値化閾値,{0}", binTH.ToString());
+                sw.WriteLine("");
+                sw.WriteLine("No., 面積[pix], 高さ[pix], 幅[pix], 重心X座標[pix], 重心Y座標[pix]");
+
+                //二値化処理結果をGUI上に描画
+                Bitmap canvas2 = new Bitmap(pictureBox2.Width, pictureBox2.Height);
+                Graphics g2 = Graphics.FromImage(canvas2);
+                g2.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+                Bitmap bitimg2 = MatToBitmap(bin);
+                g2.DrawImage(bitimg2, 0, 0, 300, 300);
+                bitimg2.Dispose();
+                pictureBox2.Image = canvas2;
             }
             else
             {
@@ -111,6 +127,8 @@ namespace ImageProcessing4
             Mat rectView = bin.CvtColor(ColorConversionCodes.GRAY2BGR);　//外接矩形用Matを用意
 
             ConnectedComponents cc = Cv2.ConnectedComponentsEx(bin);
+
+            //ブロブ個数のチェック
             if(cc.LabelCount <= 1) {
                 MessageBox.Show("ブロブが存在しません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 sw.Close();
@@ -223,38 +241,38 @@ namespace ImageProcessing4
             //int height = maxBlob.Height;
 
             //画像保存
-            Cv2.ImWrite(FolderPath + "/二値化処理画像.jpg", bin); //二値化画像
+            //Cv2.ImWrite(FolderPath + "/二値化処理画像.jpg", bin); //二値化画像
             Cv2.ImWrite(FolderPath + "/ラベリング画像.jpg", labelView);　//ラベリング画像
             Cv2.ImWrite(FolderPath + "/No.付きラベリング画像.jpg", labelView2);　//ラベリング画像
             Cv2.ImWrite(FolderPath + "/外接矩形画像.jpg", rectView);
             Cv2.ImWrite(FolderPath + "/最大面積ブロブ画像.jpg", filtered);
 
             //Bitmap canvas1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            Bitmap canvas2 = new Bitmap(pictureBox2.Width, pictureBox2.Height);
+            //Bitmap canvas2 = new Bitmap(pictureBox2.Width, pictureBox2.Height);
             Bitmap canvas3 = new Bitmap(pictureBox3.Width, pictureBox3.Height);
 
             //Graphics g1 = Graphics.FromImage(canvas1);
-            Graphics g2 = Graphics.FromImage(canvas2);
+            //Graphics g2 = Graphics.FromImage(canvas2);
             Graphics g3 = Graphics.FromImage(canvas3);
 
             //g1.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
-            g2.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+            //g2.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
             g3.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
 
             //Bitmap bitimg1 = MatToBitmap(src);
-            Bitmap bitimg2 = MatToBitmap(bin);
+            //Bitmap bitimg2 = MatToBitmap(bin);
             Bitmap bitimg3 = MatToBitmap(labelView2);
 
             //g1.DrawImage(bitimg1, 0, 0, 300, 300);
-            g2.DrawImage(bitimg2, 0, 0, 300, 300);
+            //g2.DrawImage(bitimg2, 0, 0, 300, 300);
             g3.DrawImage(bitimg3, 0, 0, 300, 300);
 
             //bitimg1.Dispose();
-            bitimg2.Dispose();
+            //bitimg2.Dispose();
             bitimg3.Dispose();
 
             //pictureBox1.Image = canvas1;
-            pictureBox2.Image = canvas2;
+            //pictureBox2.Image = canvas2;
             pictureBox3.Image = canvas3;
 
             //処理が終わったら、メッセージを表示する
