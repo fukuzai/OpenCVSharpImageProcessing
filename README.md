@@ -14,4 +14,4 @@ Image Processing such as threshold and labeling for single image using OpenCVSha
 #### .NET Framework 4.6.1
 
 # Screenshot(v1.0.0.0)
-![screenshot](https://github.com/fukuzai/OpenCVSharpImageProcessing/blob/master/screenshot.png)
+![screenshot](https://github.com/fukuzai/OpenCVSharpImageProcessing/blob/master/screenshot_v1.3.0.0.png)
